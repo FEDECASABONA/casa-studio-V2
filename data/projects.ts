@@ -1,3 +1,5 @@
+import { getProjectContent } from '../lib/content'
+
 export interface Project {
   id: string
   name: string
@@ -14,24 +16,7 @@ export const projects: Project[] = [
     id: 'fede-casabona',
     name: 'FEDE CASABONA',
     description: 'Product Designer & AI Prototype Specialist',
-    content: `# FEDE CASABONA
-## Product Designer & AI Prototype Specialist
-
-**Experience:** 10+ years in product design, AI prototyping, and digital strategy
-
-### Expertise
-- AI Prototype Development
-- Motion Design & Animation
-- Branding & Visual Identity
-- Strategic Design Thinking
-- User Experience Design
-- Interface Design
-
-### Philosophy
-Combining human creativity with artificial intelligence to create innovative digital experiences that push the boundaries of what's possible in product design.
-
-### Recent Work
-Specializing in AI-powered design tools and prototypes that enhance human creativity rather than replace it.`,
+    content: getProjectContent('fede-casabona'),
     images: [
       '/images/projects/fede-casabona/profile1.jpg',
       '/images/projects/fede-casabona/portfolio2.jpg',
@@ -45,30 +30,7 @@ Specializing in AI-powered design tools and prototypes that enhance human creati
     id: 'ninjas',
     name: 'NINJAS',
     description: 'Stealth Design Agency Platform',
-    content: `# NINJAS
-## Stealth Design Agency Platform
-
-**Mission:** Revolutionizing how design agencies operate in the digital age
-
-### Overview
-NINJAS is a cutting-edge platform that streamlines design agency workflows through AI-powered automation and intelligent project management.
-
-### Key Features
-- **AI-Powered Design Tools:** Automated design generation and optimization
-- **Client Management:** Seamless client onboarding and project tracking
-- **Team Collaboration:** Real-time collaboration tools for distributed teams
-- **Analytics Dashboard:** Comprehensive project and performance analytics
-
-### Technology Stack
-- React & Next.js
-- AI/ML Integration
-- Real-time Collaboration
-- Advanced Analytics
-
-### Impact
-- 40% reduction in project delivery time
-- 60% increase in client satisfaction
-- 85% improvement in team productivity`,
+    content: getProjectContent('ninjas'),
     images: [
       '/images/projects/ninjas/Home.webp',
       '/images/projects/ninjas/About.webp',
@@ -84,32 +46,7 @@ NINJAS is a cutting-edge platform that streamlines design agency workflows throu
     id: 'collective',
     name: 'COLLECTIVE',
     description: 'Creative Collaboration Platform',
-    content: `# COLLECTIVE
-## Creative Collaboration Platform
-
-**Vision:** Bringing together creative minds from around the world
-
-### Concept
-COLLECTIVE is a digital space where designers, artists, and creatives can collaborate, share ideas, and build amazing projects together.
-
-### Features
-- **Global Network:** Connect with creatives worldwide
-- **Project Collaboration:** Real-time collaborative design tools
-- **Portfolio Sharing:** Showcase and discover creative work
-- **Mentorship Program:** Learn from industry experts
-- **Creative Challenges:** Participate in design competitions
-
-### Community Impact
-- 10,000+ active creators
-- 500+ completed collaborations
-- 50+ countries represented
-- 95% user satisfaction rate
-
-### Technology
-- Real-time collaboration engine
-- Advanced file sharing system
-- AI-powered matching algorithm
-- Mobile-first responsive design`,
+    content: getProjectContent('collective'),
     images: [
       '/images/projects/collective/Collective-cover.webp',
       '/images/projects/collective/app-angle.webp',
@@ -124,32 +61,7 @@ COLLECTIVE is a digital space where designers, artists, and creatives can collab
     id: 'travel-assistant',
     name: 'TRAVEL ASSISTANT',
     description: 'AI-Powered Travel Planning',
-    content: `# TRAVEL ASSISTANT
-## AI-Powered Travel Planning
-
-**Goal:** Making travel planning effortless and personalized
-
-### Overview
-An intelligent travel assistant that uses AI to create personalized itineraries, find the best deals, and provide real-time travel support.
-
-### Key Capabilities
-- **Smart Itinerary Planning:** AI-generated travel plans based on preferences
-- **Real-time Price Monitoring:** Automatic price alerts and booking optimization
-- **Local Recommendations:** Personalized suggestions for restaurants, activities, and attractions
-- **Travel Alerts:** Real-time updates on weather, delays, and travel advisories
-- **Multi-language Support:** Seamless communication in 50+ languages
-
-### AI Features
-- Natural language processing for travel queries
-- Machine learning for preference learning
-- Predictive analytics for optimal booking times
-- Computer vision for landmark recognition
-
-### User Impact
-- 70% reduction in planning time
-- 35% average savings on travel costs
-- 4.8/5 user rating
-- 1M+ trips planned successfully`,
+    content: getProjectContent('travel-assistant'),
     images: [
       '/images/projects/travel-assistant/dashboard1.jpg',
       '/images/projects/travel-assistant/mobile2.jpg',
@@ -163,33 +75,7 @@ An intelligent travel assistant that uses AI to create personalized itineraries,
     id: 'ai-brain',
     name: 'AI—BRAIN',
     description: 'Advanced AI Interface System',
-    content: `# AI—BRAIN
-## Advanced AI Interface System
-
-**Mission:** Creating the next generation of human-AI interaction
-
-### Vision
-AI—BRAIN represents the future of artificial intelligence interfaces, combining advanced machine learning with intuitive user experience design.
-
-### Core Technologies
-- **Natural Language Processing:** Advanced conversational AI
-- **Computer Vision:** Real-time image and video analysis
-- **Predictive Analytics:** Anticipating user needs and behaviors
-- **Neural Networks:** Deep learning for complex problem solving
-- **Quantum Computing:** Next-generation processing power
-
-### Applications
-- **Creative Assistance:** AI-powered design and content creation
-- **Data Analysis:** Intelligent insights from complex datasets
-- **Automation:** Smart workflow optimization
-- **Research:** Accelerated scientific discovery
-- **Education:** Personalized learning experiences
-
-### Innovation Impact
-- 10x faster problem solving
-- 90% accuracy in predictions
-- Revolutionary user interface design
-- Breakthrough in human-AI collaboration`,
+    content: getProjectContent('ai-brain'),
     images: [
       '/images/projects/ai-brain/interface1.jpg',
       '/images/projects/ai-brain/neural2.jpg',

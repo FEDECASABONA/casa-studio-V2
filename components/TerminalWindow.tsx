@@ -64,32 +64,30 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
   if (isMinimized) {
     return (
       <div
-        className="fixed bg-black border border-green-400 rounded-t-lg cursor-pointer hover:bg-gray-900 transition-colors"
+        className="fixed bg-black border border-gray-500 cursor-pointer hover:bg-gray-900 transition-colors"
         style={{
           left: position.x,
           top: position.y,
           zIndex: zIndex,
           minWidth: '200px',
-          height: '32px'
+          height: '32px',
+          borderWidth: '0.5px'
         }}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
       >
         <div className="terminal-header flex items-center justify-between px-3 py-1 h-full">
           <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-            <span className="text-green-400 text-xs font-mono">{project.name}</span>
+            <span className="text-white text-xs font-roboto font-normal uppercase tracking-wider" style={{ fontSize: '0.875rem' }}>{project.name}</span>
           </div>
           <button
             onClick={(e) => {
               e.stopPropagation()
               onMinimize()
             }}
-            className="text-green-400 hover:text-white transition-colors"
+            className="text-gray-400 hover:text-white transition-colors text-xs"
           >
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-              <rect x="2" y="5" width="8" height="2" />
-            </svg>
+            −
           </button>
         </div>
       </div>
@@ -99,7 +97,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
   return (
     <div
       ref={windowRef}
-      className={`fixed bg-black border border-green-400 rounded-lg shadow-2xl ${isMaximized ? 'w-full h-full top-0 left-0' : ''}`}
+      className={`fixed bg-black border border-gray-500 shadow-2xl ${isMaximized ? 'w-full h-full top-0 left-0' : ''}`}
       style={{
         left: isMaximized ? 0 : position.x,
         top: isMaximized ? 0 : position.y,
@@ -107,74 +105,68 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
         height: isMaximized ? '100vh' : '600px',
         zIndex: zIndex,
         minWidth: '400px',
-        minHeight: '300px'
+        minHeight: '300px',
+        borderWidth: '0.5px',
+        resize: 'both',
+        overflow: 'hidden'
       }}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
     >
       {/* Terminal Header */}
-      <div className="terminal-header flex items-center justify-between px-4 py-2 border-b border-green-400 bg-gray-900 rounded-t-lg">
+      <div className="terminal-header flex items-center justify-between px-4 py-2 border-b border-gray-500 bg-black" style={{ borderWidth: '0.5px' }}>
         <div className="flex items-center space-x-3">
-          <div className="flex space-x-1">
-            <div className="w-3 h-3 bg-red-500 rounded-full cursor-pointer hover:bg-red-400 transition-colors" onClick={onClose}></div>
-            <div className="w-3 h-3 bg-yellow-500 rounded-full cursor-pointer hover:bg-yellow-400 transition-colors" onClick={onMinimize}></div>
-            <div className="w-3 h-3 bg-green-500 rounded-full cursor-pointer hover:bg-green-400 transition-colors" onClick={onMaximize}></div>
+          <div className="flex space-x-2">
+            <button 
+              className="text-gray-400 hover:text-white transition-colors text-xs"
+              onClick={onClose}
+              title="Close"
+            >
+              ✕
+            </button>
+            <button 
+              className="text-gray-400 hover:text-white transition-colors text-xs"
+              onClick={onMinimize}
+              title="Minimize"
+            >
+              −
+            </button>
+            <button 
+              className="text-gray-400 hover:text-white transition-colors text-xs"
+              onClick={onMaximize}
+              title="Maximize"
+            >
+              □
+            </button>
           </div>
-          <span className="text-green-400 text-sm font-mono font-bold">{project.name}</span>
-          <span className="text-gray-400 text-xs font-mono">[{project.status}]</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-400 text-xs font-mono">{project.category} • {project.year}</span>
+          <span className="text-white font-roboto font-normal uppercase tracking-wider" style={{ fontSize: '0.875rem' }}>{project.name}</span>
         </div>
       </div>
 
       {/* Terminal Content */}
       <div className="flex h-full">
-        {/* Sidebar */}
-        <div className="w-48 bg-gray-900 border-r border-green-400 p-4">
-          <div className="space-y-2">
-            <div className="text-green-400 text-xs font-mono font-bold mb-4">PROJECT INFO</div>
-            <div className="text-gray-300 text-xs font-mono">
-              <div className="mb-2">
-                <span className="text-green-400">Name:</span><br />
-                <span className="text-white">{project.name}</span>
-              </div>
-              <div className="mb-2">
-                <span className="text-green-400">Category:</span><br />
-                <span className="text-white">{project.category}</span>
-              </div>
-              <div className="mb-2">
-                <span className="text-green-400">Year:</span><br />
-                <span className="text-white">{project.year}</span>
-              </div>
-              <div className="mb-2">
-                <span className="text-green-400">Status:</span><br />
-                <span className="text-white">{project.status}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col w-full">
           {/* Tabs */}
-          <div className="flex border-b border-green-400 bg-gray-800">
+          <div className="flex border-b border-gray-500 bg-black" style={{ borderWidth: '0.5px' }}>
             <button
-              className={`px-4 py-2 text-xs font-mono border-r border-green-400 transition-colors ${
+              className={`px-4 py-2 text-xs font-roboto font-normal uppercase tracking-wider border-r border-gray-500 transition-colors ${
                 activeTab === 'content' 
-                  ? 'bg-green-400 text-black font-bold' 
-                  : 'text-green-400 hover:bg-gray-700'
+                  ? 'bg-gray-600 text-white' 
+                  : 'text-gray-400 hover:bg-gray-800'
               }`}
+              style={{ fontSize: '0.875rem', borderWidth: '0.5px' }}
               onClick={() => setActiveTab('content')}
             >
               content.txt
             </button>
             <button
-              className={`px-4 py-2 text-xs font-mono transition-colors ${
+              className={`px-4 py-2 text-xs font-roboto font-normal uppercase tracking-wider transition-colors ${
                 activeTab === 'images' 
-                  ? 'bg-green-400 text-black font-bold' 
-                  : 'text-green-400 hover:bg-gray-700'
+                  ? 'bg-gray-600 text-white' 
+                  : 'text-gray-400 hover:bg-gray-800'
               }`}
+              style={{ fontSize: '0.875rem' }}
               onClick={() => setActiveTab('images')}
             >
               images/
@@ -182,9 +174,9 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
           </div>
 
           {/* Content Area */}
-          <div className="flex-1 overflow-auto p-4">
+          <div className="flex-1 overflow-auto p-4" style={{ height: 'calc(100% - 40px)' }}>
             {activeTab === 'content' ? (
-              <div className="text-green-400 text-sm font-mono leading-relaxed whitespace-pre-line">
+              <div className="text-white font-roboto font-normal uppercase tracking-wider leading-relaxed whitespace-pre-line" style={{ fontSize: '0.875rem' }}>
                 {project.content}
               </div>
             ) : (
@@ -196,10 +188,11 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
                       alt={`${project.name} - Image ${index + 1}`}
                       width={400}
                       height={300}
-                      className="w-full h-48 object-cover rounded border border-green-400 hover:border-green-300 transition-colors"
+                      className="w-full h-48 object-cover border border-gray-500 hover:border-gray-400 transition-colors"
+                      style={{ borderWidth: '0.5px' }}
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 flex items-center justify-center">
-                      <span className="text-green-400 text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="text-white text-xs font-roboto font-normal uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity" style={{ fontSize: '0.875rem' }}>
                         view_fullscreen
                       </span>
                     </div>
