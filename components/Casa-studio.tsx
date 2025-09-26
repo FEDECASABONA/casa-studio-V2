@@ -198,6 +198,7 @@ const Portfolio = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [currentVideo, setCurrentVideo] = useState<string | null>(null)
   
   // Window management
   const {
@@ -358,16 +359,32 @@ const Portfolio = () => {
                    </div>
                    <div
                      className="nav-item cursor-pointer"
-                     onMouseEnter={() => setHoveredNav('Observer')}
-                     onMouseLeave={() => setHoveredNav(null)}
+                     onMouseEnter={() => {
+                       setHoveredNav('Observer')
+                       setCurrentVideo('https://youtu.be/6ZMAJPtu-u4?feature=shared&t=6')
+                       setIsVideoPlaying(true)
+                     }}
+                     onMouseLeave={() => {
+                       setHoveredNav(null)
+                       setCurrentVideo(null)
+                       setIsVideoPlaying(false)
+                     }}
                      onClick={() => openWindow('observer')}
                    >
                      Observer
                    </div>
                    <div
                      className="nav-item cursor-pointer"
-                     onMouseEnter={() => setHoveredNav('Casa')}
-                     onMouseLeave={() => setHoveredNav(null)}
+                     onMouseEnter={() => {
+                       setHoveredNav('Casa')
+                       setCurrentVideo('https://youtu.be/sWThVmiz1aM?feature=shared&t=55')
+                       setIsVideoPlaying(true)
+                     }}
+                     onMouseLeave={() => {
+                       setHoveredNav(null)
+                       setCurrentVideo(null)
+                       setIsVideoPlaying(false)
+                     }}
                      onClick={() => openWindow('casa')}
                    >
                      Casa
@@ -380,8 +397,21 @@ const Portfolio = () => {
                    >
                      Magic Places
             </div>
-            <div className="nav-item">
-                     GET IN TOUCH
+            <div 
+              className="nav-item cursor-pointer"
+              onMouseEnter={() => {
+                setHoveredNav('GET IN TOUCH')
+                setCurrentVideo('https://youtu.be/WrwyKJ5KsHs?feature=shared')
+                setIsVideoPlaying(true)
+              }}
+              onMouseLeave={() => {
+                setHoveredNav(null)
+                setCurrentVideo(null)
+                setIsVideoPlaying(false)
+              }}
+              onClick={() => window.open('https://www.linkedin.com/in/federicocasabona/', '_blank')}
+            >
+              GET IN TOUCH
             </div>
           </div>
         </div>
@@ -406,7 +436,26 @@ const Portfolio = () => {
               />
             </div>
           )}
-          {hoveredNav && hoveredNav !== 'FEDE CASABONA' && getImageForNav(hoveredNav) && (
+          {currentVideo && isVideoPlaying && hoveredNav !== 'FEDE CASABONA' && (
+            <div className="fixed bottom-0 right-0 animate-fadeIn" style={{ zIndex: 30, marginBottom: '20px', marginRight: '20px' }}>
+              <iframe
+                src={currentVideo}
+                width="560"
+                height="315"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="object-contain"
+                style={{ 
+                  maxHeight: '70vh',
+                  maxWidth: '60vw',
+                  height: 'auto',
+                  width: 'auto'
+                }}
+              />
+            </div>
+          )}
+          {hoveredNav && hoveredNav !== 'FEDE CASABONA' && !currentVideo && getImageForNav(hoveredNav) && (
             <div className="fixed bottom-0 right-0 animate-fadeIn" style={{ zIndex: 30, marginBottom: '20px', marginRight: '20px' }}>
               <Image
                 src={getImageForNav(hoveredNav)!.src}
@@ -551,8 +600,21 @@ const Portfolio = () => {
                  >
                    Magic Places
             </div>
-            <div className="nav-item col-span-2">
-                   GET IN TOUCH
+            <div 
+              className="nav-item col-span-2 cursor-pointer"
+              onTouchStart={() => {
+                setHoveredNav('GET IN TOUCH')
+                setCurrentVideo('https://youtu.be/WrwyKJ5KsHs?feature=shared')
+                setIsVideoPlaying(true)
+              }}
+              onTouchEnd={() => {
+                setHoveredNav(null)
+                setCurrentVideo(null)
+                setIsVideoPlaying(false)
+              }}
+              onClick={() => window.open('https://www.linkedin.com/in/federicocasabona/', '_blank')}
+            >
+              GET IN TOUCH
             </div>
           </div>
         </div>
@@ -577,7 +639,26 @@ const Portfolio = () => {
               />
             </div>
           )}
-          {hoveredNav && hoveredNav !== 'FEDE CASABONA' && getImageForNav(hoveredNav) && (
+          {currentVideo && isVideoPlaying && hoveredNav !== 'FEDE CASABONA' && (
+            <div className="fixed bottom-0 right-0 animate-fadeIn" style={{ zIndex: 30, marginBottom: '250px', marginRight: '20px' }}>
+              <iframe
+                src={currentVideo}
+                width="280"
+                height="158"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="object-contain"
+                style={{ 
+                  maxHeight: '50vh',
+                  maxWidth: '80vw',
+                  height: 'auto',
+                  width: 'auto'
+                }}
+              />
+            </div>
+          )}
+          {hoveredNav && hoveredNav !== 'FEDE CASABONA' && !currentVideo && getImageForNav(hoveredNav) && (
             <div className="fixed bottom-0 right-0 animate-fadeIn" style={{ zIndex: 30, marginBottom: '250px', marginRight: '20px' }}>
               <Image
                 src={getImageForNav(hoveredNav)!.src}
