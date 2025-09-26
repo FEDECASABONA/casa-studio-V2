@@ -361,7 +361,7 @@ const Portfolio = () => {
                      className="nav-item cursor-pointer"
                      onMouseEnter={() => {
                        setHoveredNav('Observer')
-                       setCurrentVideo('https://youtu.be/6ZMAJPtu-u4?feature=shared&t=6')
+                       setCurrentVideo('https://www.youtube.com/embed/6ZMAJPtu-u4?start=6&autoplay=1&mute=1&loop=1&playlist=6ZMAJPtu-u4')
                        setIsVideoPlaying(true)
                      }}
                      onMouseLeave={() => {
@@ -377,7 +377,7 @@ const Portfolio = () => {
                      className="nav-item cursor-pointer"
                      onMouseEnter={() => {
                        setHoveredNav('Casa')
-                       setCurrentVideo('https://youtu.be/sWThVmiz1aM?feature=shared&t=55')
+                       setCurrentVideo('https://www.youtube.com/embed/sWThVmiz1aM?start=55&autoplay=1&mute=1&loop=1&playlist=sWThVmiz1aM')
                        setIsVideoPlaying(true)
                      }}
                      onMouseLeave={() => {
@@ -401,7 +401,7 @@ const Portfolio = () => {
               className="nav-item cursor-pointer"
               onMouseEnter={() => {
                 setHoveredNav('GET IN TOUCH')
-                setCurrentVideo('https://youtu.be/WrwyKJ5KsHs?feature=shared')
+                setCurrentVideo('https://www.youtube.com/embed/WrwyKJ5KsHs?autoplay=1&mute=1&loop=1&playlist=WrwyKJ5KsHs')
                 setIsVideoPlaying(true)
               }}
               onMouseLeave={() => {
@@ -604,7 +604,7 @@ const Portfolio = () => {
               className="nav-item col-span-2 cursor-pointer"
               onTouchStart={() => {
                 setHoveredNav('GET IN TOUCH')
-                setCurrentVideo('https://youtu.be/WrwyKJ5KsHs?feature=shared')
+                setCurrentVideo('https://www.youtube.com/embed/WrwyKJ5KsHs?autoplay=1&mute=1&loop=1&playlist=WrwyKJ5KsHs')
                 setIsVideoPlaying(true)
               }}
               onTouchEnd={() => {
