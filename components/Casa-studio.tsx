@@ -259,8 +259,8 @@ const Portfolio = () => {
       
       {/* Desktop Layout */}
       <div className={`hidden lg:flex min-h-screen ${isLoading ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'} transition-all duration-1000 ease-out`} style={{ paddingTop: '6rem' }}>
-        {/* Left Center Navigation */}
-        <div className="fixed bg-black" style={{ left: '20px', top: '50%', transform: 'translateY(-50%)', zIndex: 40 }}>
+        {/* Bottom Left Navigation */}
+        <div className="fixed bg-black" style={{ left: '20px', bottom: '20px', zIndex: 40 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                    <div
                      className="nav-item cursor-pointer"
