@@ -40,6 +40,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
   const [isResizing, setIsResizing] = useState(false)
   const [displayedContent, setDisplayedContent] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null)
   const windowRef = useRef<HTMLDivElement>(null)
   const resizeRef = useRef<HTMLDivElement>(null)
 
@@ -62,7 +63,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
       setDisplayedContent('')
       
       let currentIndex = 0
-      const typingSpeed = 30 // milliseconds per character
+      const typingSpeed = 15 // milliseconds per character (faster)
       
       const typeNextChar = () => {
         if (currentIndex < project.content.length) {
@@ -74,7 +75,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
         }
       }
       
-      const timer = setTimeout(typeNextChar, 100) // Small delay before starting
+      const timer = setTimeout(typeNextChar, 50) // Smaller delay before starting
       return () => clearTimeout(timer)
     }
   }, [activeTab, project.content])
@@ -82,7 +83,35 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
   // Handle resize without moving position
   const handleResizeStart = (e: React.MouseEvent) => {
     e.stopPropagation()
+    e.preventDefault()
     setIsResizing(true)
+    
+    const startX = e.clientX
+    const startY = e.clientY
+    const startWidth = windowRef.current?.offsetWidth || 800
+    const startHeight = windowRef.current?.offsetHeight || 600
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!windowRef.current) return
+      
+      const deltaX = e.clientX - startX
+      const deltaY = e.clientY - startY
+      
+      const newWidth = Math.max(400, startWidth + deltaX)
+      const newHeight = Math.max(300, startHeight + deltaY)
+      
+      windowRef.current.style.width = `${newWidth}px`
+      windowRef.current.style.height = `${newHeight}px`
+    }
+    
+    const handleMouseUp = () => {
+      setIsResizing(false)
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+    }
+    
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
   }
 
   useEffect(() => {
@@ -232,14 +261,18 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
             ) : (
               <div className="flex flex-col gap-4">
                 {project.images.map((image, index) => (
-                  <div key={index} className="relative group">
+                  <div key={index} className="relative group cursor-pointer" onClick={() => setLightboxImage(image)}>
                     <Image
                       src={image}
                       alt={`${project.name} - Image ${index + 1}`}
                       width={400}
                       height={300}
-                      className="w-full h-48 object-cover border border-gray-500 hover:border-gray-400 transition-colors"
-                      style={{ borderWidth: '0.5px' }}
+                      className="w-full border border-gray-500 hover:border-gray-400 transition-colors"
+                      style={{ 
+                        borderWidth: '0.5px',
+                        objectFit: 'contain',
+                        maxHeight: '300px'
+                      }}
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 flex items-center justify-center">
                       <span className="text-white font-roboto font-normal uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity" style={{ fontSize: '0.74rem' }}>
@@ -263,6 +296,30 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
         }}
         onMouseDown={handleResizeStart}
       />
+      
+      {/* Lightbox Modal */}
+      {lightboxImage && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+          onClick={() => setLightboxImage(null)}
+        >
+          <div className="relative max-w-4xl max-h-full p-4">
+            <button
+              className="absolute top-2 right-2 text-white text-2xl hover:text-gray-400 transition-colors z-10"
+              onClick={() => setLightboxImage(null)}
+            >
+              ✕
+            </button>
+            <Image
+              src={lightboxImage}
+              alt="Full size image"
+              width={800}
+              height={600}
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
